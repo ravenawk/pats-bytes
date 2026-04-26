@@ -1,0 +1,54 @@
+{{- with site.Params.profileMode }}
+<div class="profile">
+    <div class="profile_inner">
+        {{- with .imageUrl }}
+        <img draggable="false" src="{{ . }}"
+            alt="{{ $.Site.Params.profileMode.imageTitle | default "profile image" }}"
+            title="{{ $.Site.Params.profileMode.imageTitle }}"
+            width="{{ $.Site.Params.profileMode.imageWidth | default 120 }}"
+            height="{{ $.Site.Params.profileMode.imageHeight | default 120 }}" />
+        {{- end }}
+        <h1>{{ .title | markdownify }}</h1>
+        <span>{{ .subtitle | markdownify }}</span>
+        {{- with site.Params.socialIcons }}
+        <div class="social-icons" align="center">
+            {{- range . }}{{- partial "svg.html" . }}{{- end }}
+        </div>
+        {{- end }}
+        {{- with .buttons }}
+        <div class="buttons">
+            {{- range . }}
+            <a class="button" href="{{ trim .url " " }}" rel="noopener" title="{{ .name }}">
+                <span class="button-inner">{{ .name }}</span>
+            </a>
+            {{- end }}
+        </div>
+        {{- end }}
+    </div>
+</div>
+{{- end }}
+
+{{/* Post list */}}
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
+{{- $paginator := $.Paginate $pages }}
+{{- range $index, $page := $paginator.Pages }}
+<article class="post-entry">
+    {{- $isHidden := ($page.Param "cover.hiddenInList") | default ($page.Param "cover.hidden") | default false }}
+    {{- partial "cover.html" (dict "cxt" $page "IsSingle" false "isHidden" $isHidden) }}
+    <header class="entry-header">
+        <h2>{{- $page.Title }}</h2>
+    </header>
+    {{- if (ne ($page.Param "hideSummary") true) }}
+    <div class="entry-content">
+        <p>{{ $page.Summary | plainify | htmlUnescape }}{{ if $page.Truncated }}...{{ end }}</p>
+    </div>
+    {{- end }}
+    {{- if not ($page.Param "hideMeta") }}
+    <footer class="entry-footer">
+        {{- partial "post_meta.html" $page -}}
+    </footer>
+    {{- end }}
+    <a class="entry-link" aria-label="post link to {{ $page.Title | plainify }}" href="{{ $page.Permalink }}"></a>
+</article>
+{{- end }}

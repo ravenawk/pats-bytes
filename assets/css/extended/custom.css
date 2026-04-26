@@ -1,0 +1,347 @@
+/* ============================================================
+   Pat's Bytes — PaperMod Custom CSS
+   assets/css/extended/custom.css
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   Fonts — JetBrains Mono (self-hosted, code only)
+   ------------------------------------------------------------ */
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('/fonts/JetBrainsMono-Italic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+/* ------------------------------------------------------------
+   CSS Variable Overrides — Light Theme
+   ------------------------------------------------------------ */
+:root {
+    --link-color: #0077cc;
+    --link-hover: #005fa3;
+    --content-gap: 2rem;
+}
+
+
+/* ------------------------------------------------------------
+   CSS Variable Overrides — Dark Theme
+   ------------------------------------------------------------ */
+.dark {
+    --link-color: #4da6ff;
+    --link-hover: #80bfff;
+}
+
+
+/* ------------------------------------------------------------
+   Layout — Page Width & Main Container
+   ------------------------------------------------------------ */
+.main {
+    max-width: calc(var(--main-width) + var(--gap) * 20);
+}
+
+
+/* ------------------------------------------------------------
+   Layout — Header & Navigation
+   ------------------------------------------------------------ */
+.header {
+    background-color: #546e7a;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-nav {
+    max-width: calc(var(--main-width) + var(--gap) * 20);
+    margin: auto;
+}
+
+.nav-link,
+.menu a,
+#theme-toggle,
+.logo a,
+.logo span {
+    color: #ffffff !important;
+}
+
+#theme-toggle svg path {
+    stroke: #ffffff !important;
+}
+
+
+/* ------------------------------------------------------------
+   Layout — Footer
+   ------------------------------------------------------------ */
+.footer {
+    background-color: #546e7a !important;
+    color: #ffffff !important;
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+.footer a {
+    color: #ffffff !important;
+}
+
+
+/* ------------------------------------------------------------
+   Layout — Homepage Profile
+   ------------------------------------------------------------ */
+.main .profile {
+    min-height: unset;
+    padding: 2rem 0 1rem 0;
+    max-width: calc(var(--main-width) + var(--gap) * 20);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.buttons {
+    margin-bottom: 0;
+}
+
+
+/* ------------------------------------------------------------
+   Layout — Post Cards (thumbnail side layout)
+   ------------------------------------------------------------ */
+.post-entry {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 5px 0px;
+    max-width: calc(var(--main-width) + var(--gap) * 20);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (min-width: 700px) {
+    .post-entry {
+        grid-template-columns: 2fr 3fr;
+        grid-gap: 0px 10px;
+    }
+}
+
+.post-entry .entry-cover {
+    max-width: fit-content;
+    padding-right: 3rem;
+    margin: auto;
+    grid-row: span 3;
+}
+
+.post-entry .entry-header  { align-self: center; }
+.post-entry .entry-content { align-self: center; }
+.post-entry .entry-footer  { align-self: end; }
+
+
+/* ------------------------------------------------------------
+   Body / Base Typography
+   ------------------------------------------------------------ */
+body {
+    font-size: 17px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* ------------------------------------------------------------
+   Post / Page Content — Prose Readability
+   ------------------------------------------------------------ */
+.post-content {
+    font-size: 17px;
+    line-height: 1.75;
+}
+
+.post-content h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
+.post-content h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.post-content h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.post-content p {
+    margin-bottom: 1.25rem;
+}
+
+.post-content a {
+    color: var(--link-color);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+}
+
+.post-content a:hover {
+    color: var(--link-hover);
+}
+
+.post-content blockquote {
+    border-left: 3px solid var(--link-color);
+    padding: 0.5rem 1.25rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    opacity: 0.85;
+}
+
+.post-content hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+}
+
+
+/* ------------------------------------------------------------
+   Lists
+   ------------------------------------------------------------ */
+.post-content ul,
+.post-content ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.post-content li {
+    margin-bottom: 0.4rem;
+}
+
+.post-content li > ul,
+.post-content li > ol {
+    margin-top: 0.4rem;
+    margin-bottom: 0;
+}
+
+
+/* ------------------------------------------------------------
+   Tables
+   ------------------------------------------------------------ */
+.post-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 1.5rem 0;
+}
+
+.post-content th,
+.post-content td {
+    padding: 0.6rem 1rem;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+.post-content th {
+    font-weight: 600;
+    background-color: var(--code-bg);
+}
+
+
+/* ------------------------------------------------------------
+   Code — JetBrains Mono
+   ------------------------------------------------------------ */
+
+/* Inline code */
+.post-content code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 0.875em;
+    font-style: normal;
+    padding: 0.15em 0.4em;
+    border-radius: 4px;
+}
+
+/* Code blocks */
+.post-content pre,
+.post-content pre code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.post-content pre {
+    border-radius: 6px;
+    padding: 1.25rem 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+}
+
+/* Force non-italic — Monokai defines italic for some tokens */
+.post-content pre * {
+    font-style: normal !important;
+}
+
+
+/* ------------------------------------------------------------
+   Code — Line Number Table Layout
+   ------------------------------------------------------------ */
+
+/* Remove outer pre padding when it contains a line number table */
+.post-content pre:has(.lntable) {
+    padding: 0;
+}
+
+.lntable {
+    border-spacing: 0;
+    padding: 0;
+}
+
+/* Top/bottom padding on cells, no left/right (handled per-cell below) */
+.lntable td.lntd {
+    padding: 0.75rem 0 !important;
+}
+
+/* Line number column — indent from left, tight to code on right */
+.lntable td.lntd:first-child {
+    padding-left: 1.25rem !important;
+    padding-right: 0 !important;
+    user-select: none;
+}
+
+/* Code column — no gap on left, breathing room on right */
+.lntable td.lntd:last-child {
+    padding-left: 0 !important;
+    padding-right: 1.25rem !important;
+}
+
+/* Reset any inner pre elements inside table cells */
+.lntable td.lntd pre {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+/* ------------------------------------------------------------
+   Post Meta — dates, reading time, tags
+   ------------------------------------------------------------ */
+.post-meta {
+    font-size: 0.85rem;
+    opacity: 0.75;
+}

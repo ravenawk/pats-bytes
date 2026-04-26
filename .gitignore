@@ -1,0 +1,29 @@
+# Hugo build output
+public/
+resources/_gen/
+.hugo_build.lock
+
+# Hugo module cache
+/go.sum
+
+# Node (if you ever add npm-based tooling)
+node_modules/
+package-lock.json
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment / secrets (just in case)
+.env
+.env.*
+
+# Cloudflare Pages (local wrangler usage)
+.wrangler/

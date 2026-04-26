@@ -1,0 +1,113 @@
+# ============================================================
+# Pat's Bytes — Hugo + PaperMod Configuration
+# ============================================================
+
+baseURL: "https://patsbytes.com/"   # Replace with your actual Cloudflare Pages domain
+title: "Pat's Bytes"
+languageCode: "en-us"
+paginate: 10                        # Posts per list page
+
+# Hugo module: pulls PaperMod without a git submodule
+module:
+  imports:
+    - path: github.com/adityatelange/hugo-PaperMod
+
+# Output formats — JSON is required for PaperMod's client-side search
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+# Taxonomies — tiers are front matter only (no URL), keeping this minimal
+taxonomies:
+  tag: tags
+
+# ── Markdown rendering ────────────────────────────────────────
+markup:
+  highlight:
+    style: nord
+    lineNos: false
+    lineNumbersInTable: true   # cleaner copy-paste than inline line numbers
+    noClasses: false           # set false so you can override styles in custom.css
+  goldmark:
+    renderer:
+      unsafe: true             # allows raw HTML blocks in .md files (useful for callouts)
+
+# ── Site parameters ───────────────────────────────────────────
+params:
+  author: "Pat"
+  description: >
+    Learning in public — Ansible, homelab infrastructure, Linux, and DevOps tooling.
+
+  # Theme toggle (light default, user can switch to dark)
+  defaultTheme: light
+  disableThemeToggle: false
+
+  cover:
+    linkFullImages: true
+    hiddenInList: false
+
+  # Home page hero text
+  profileMode:
+    enabled: true
+    title: "Pat's Bytes"
+    subtitle: >
+      Learning in public. I write about Ansible, homelab infrastructure,
+      Linux, and DevOps tooling — mostly things I'm actively building or breaking.
+    imageUrl: "/avatar.png"
+    imageWidth: 250
+    imageHeight: 250
+    imageTitle: "Pat"
+    buttons:
+      - name: Posts
+        url: /posts/
+  mainSections:
+    - posts
+
+  # Social icons rendered on the home page
+  socialIcons:
+    - name: github
+      url: "https://github.com/ravenawk"
+    - name: rss
+      url: "/index.xml"
+
+  # ── Per-post display options ────────────────────────────────
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: true     # previous/next post links at bottom
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true  # one-click copy on all code blocks
+  ShowWordCount: false       # reading time is enough
+  ShowRssButtonInSectionTermList: true
+  ShowToc: true              # table of contents on by default
+  TocOpen: false             # collapsed by default — reader opens if wanted
+
+  # ── Search (Fuse.js) ────────────────────────────────────────
+  # Requires content/search.md (see directory structure below)
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    threshold: 0.4           # lower = stricter match; tune to taste
+    minMatchCharLength: 2
+    keys:
+      - title
+      - permalink
+      - summary
+      - content
+
+# ── Navigation menu ──────────────────────────────────────────
+menu:
+  main:
+    - name: Posts
+      url: /posts/
+      weight: 10
+    - name: Tags
+      url: /tags/
+      weight: 20
+    - name: Search
+      url: /search/
+      weight: 30
+    - name: About
+      url: /about/
+      weight: 40
