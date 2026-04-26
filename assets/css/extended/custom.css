@@ -105,9 +105,19 @@
 /* ------------------------------------------------------------
    Layout — Homepage Profile
    ------------------------------------------------------------ */
+
+.profile {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.profile_inner {
+    padding-bottom: 0;
+}
+
 .main .profile {
     min-height: unset;
-    padding: 2rem 0 1rem 0;
+    padding: 0.25rem 0 0 0;   /* zero out the bottom */
     max-width: calc(var(--main-width) + var(--gap) * 20);
     margin-left: auto;
     margin-right: auto;
@@ -117,12 +127,45 @@
     margin-bottom: 0;
 }
 
+.home-intro {
+    max-width: 860px;
+    margin: -1.5rem auto 2.5rem;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.home-intro h2 {
+    margin-top: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+.home-intro ul {
+    padding-left: 1.2rem;
+}
+
+.home-intro hr {
+    margin: 2rem 0;
+    border-color: var(--border);
+}
 
 /* ------------------------------------------------------------
    Layout — Post Cards (thumbnail side layout)
    ------------------------------------------------------------ */
+
+.post-single {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+@media (min-width: 1200px) {
+    .post-single {
+        max-width: 1000px;
+    }
+}
+
 .post-entry {
     display: grid;
+    position: relative;
     grid-template-columns: 1fr;
     grid-gap: 5px 0px;
     max-width: calc(var(--main-width) + var(--gap) * 20);
@@ -142,12 +185,12 @@
     padding-right: 3rem;
     margin: auto;
     grid-row: span 3;
+    grid-column: 1;
 }
 
-.post-entry .entry-header  { align-self: center; }
-.post-entry .entry-content { align-self: center; }
-.post-entry .entry-footer  { align-self: end; }
-
+.post-entry .entry-header  { align-self: center; grid-column: 2; }
+.post-entry .entry-content { align-self: center; grid-column: 2; }
+.post-entry .entry-footer  { align-self: end;    grid-column: 2; }
 
 /* ------------------------------------------------------------
    Body / Base Typography
@@ -163,14 +206,25 @@ body {
 /* ------------------------------------------------------------
    Post / Page Content — Prose Readability
    ------------------------------------------------------------ */
+h1, h2, h3 {
+    font-weight: 300;
+}
 .post-content {
     font-size: 17px;
     line-height: 1.75;
 }
 
+.post-content h1 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.02em;
+}
+
 .post-content h2 {
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 300;
     margin-top: 2.5rem;
     margin-bottom: 0.75rem;
     letter-spacing: -0.02em;
@@ -178,7 +232,7 @@ body {
 
 .post-content h3 {
     font-size: 1.2rem;
-    font-weight: 600;
+    font-weight: 300;
     margin-top: 2rem;
     margin-bottom: 0.5rem;
     letter-spacing: -0.01em;
@@ -186,7 +240,7 @@ body {
 
 .post-content h4 {
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 300;
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
 }
@@ -196,7 +250,6 @@ body {
 }
 
 .post-content a {
-    color: var(--link-color);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;

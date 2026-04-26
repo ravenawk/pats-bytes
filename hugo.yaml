@@ -51,7 +51,7 @@ params:
   # Home page hero text
   profileMode:
     enabled: true
-    title: "Pat's Bytes"
+    title: "Welcome to Pat's Bytes"
     subtitle: >
       Learning in public. I write about Ansible, homelab infrastructure,
       Linux, and DevOps tooling — mostly things I'm actively building or breaking.
@@ -59,9 +59,6 @@ params:
     imageWidth: 250
     imageHeight: 250
     imageTitle: "Pat"
-    buttons:
-      - name: Posts
-        url: /posts/
   mainSections:
     - posts
 
@@ -81,7 +78,7 @@ params:
   ShowWordCount: false       # reading time is enough
   ShowRssButtonInSectionTermList: true
   ShowToc: true              # table of contents on by default
-  TocOpen: false             # collapsed by default — reader opens if wanted
+  TocOpen: true             # collapsed by default — reader opens if wanted
 
   # ── Search (Fuse.js) ────────────────────────────────────────
   # Requires content/search.md (see directory structure below)

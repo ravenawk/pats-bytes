@@ -28,6 +28,13 @@
 </div>
 {{- end }}
 
+{{/* Intro text from _index.md body */}}
+{{- with $.Content }}
+<div class="home-intro">
+    {{ . }}
+</div>
+{{- end }}
+
 {{/* Post list */}}
 {{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true" }}
