@@ -111,6 +111,9 @@ menu:
     - name: Search
       url: /search/
       weight: 40
+    - name: Contact
+      url: /contact/
+      weight: 50
     - name: About
       url: /about/
-      weight: 50
+      weight: 60

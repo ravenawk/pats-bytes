@@ -1,0 +1,29 @@
+{{- $type := .Get "type" | default "note" -}}
+{{- $title := .Get "title" -}}
+
+{{- $icons := dict
+  "note"    "✏️"
+  "tip"     "💡"
+  "info"    "ℹ️"
+  "warning" "⚠️"
+-}}
+
+{{- $defaultTitles := dict
+  "note"    "Note"
+  "tip"     "Tip"
+  "info"    "Info"
+  "warning" "Warning"
+-}}
+
+{{- $icon  := index $icons $type | default "📌" -}}
+{{- $label := cond (ne $title "") $title (index $defaultTitles $type | default (humanize $type)) -}}
+
+<div class="admonition admonition-{{ $type }}">
+  <div class="admonition-title">
+    <span class="admonition-icon" aria-hidden="true">{{ $icon }}</span>
+    <span>{{ $label }}</span>
+  </div>
+  <div class="admonition-content">
+    {{ .Inner | markdownify }}
+  </div>
+</div>

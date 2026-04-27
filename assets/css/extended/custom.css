@@ -460,3 +460,132 @@ h1, h2, h3 {
 .tag-entry .entry-cover {
     display: flex;
 }
+
+/* ============================================================
+   Admonitions — Pat's Bytes / Hugo PaperMod
+   Add to: assets/css/extended/custom.css
+   ============================================================ */
+
+/* -- Type-specific color tokens ----------------------------- */
+:root {
+  --adm-note-border:   #4a90d9;
+  --adm-note-bg:       #eef5fd;
+  --adm-note-title:    #2a6099;
+
+  --adm-tip-border:    #3aaa6e;
+  --adm-tip-bg:        #edfaf3;
+  --adm-tip-title:     #1e7a4a;
+
+  --adm-info-border:   #2ab0c5;
+  --adm-info-bg:       #e8f8fb;
+  --adm-info-title:    #146f80;
+
+  --adm-warning-border:#e6a817;
+  --adm-warning-bg:    #fdf6e3;
+  --adm-warning-title: #9a6a00;
+}
+
+/* Dark mode overrides — PaperMod sets [data-theme="dark"] on <html> */
+[data-theme="dark"] {
+  --adm-note-border:   #5a9fd4;
+  --adm-note-bg:       #1a2a3a;
+  --adm-note-title:    #7fbfee;
+
+  --adm-tip-border:    #3dba78;
+  --adm-tip-bg:        #0f2a1e;
+  --adm-tip-title:     #6dd49a;
+
+  --adm-info-border:   #28b9ce;
+  --adm-info-bg:       #0c2a30;
+  --adm-info-title:    #5fd4e3;
+
+  --adm-warning-border:#e6b830;
+  --adm-warning-bg:    #2a1e05;
+  --adm-warning-title: #f0c84a;
+}
+
+/* -- Base admonition block ---------------------------------- */
+.admonition {
+  margin: 1.5rem 0;
+  border-left: 4px solid transparent;
+  border-radius: 0 6px 6px 0;
+  overflow: hidden;
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+
+/* -- Title bar ---------------------------------------------- */
+.admonition-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 0.88rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.admonition-icon {
+  font-size: 1rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* -- Content area ------------------------------------------- */
+.admonition-content {
+  padding: 0.75rem 1rem 0.75rem 1.25rem;
+}
+
+.admonition-content > :first-child { margin-top: 0; }
+.admonition-content > :last-child  { margin-bottom: 0; }
+
+/* -- Per-type theming --------------------------------------- */
+.admonition-note {
+  border-left-color: var(--adm-note-border);
+  background-color:  var(--adm-note-bg);
+}
+.admonition-note .admonition-title {
+  color:            var(--adm-note-title);
+  background-color: color-mix(in srgb, var(--adm-note-bg) 60%, var(--adm-note-border) 20%);
+}
+
+.admonition-tip {
+  border-left-color: var(--adm-tip-border);
+  background-color:  var(--adm-tip-bg);
+}
+.admonition-tip .admonition-title {
+  color:            var(--adm-tip-title);
+  background-color: color-mix(in srgb, var(--adm-tip-bg) 60%, var(--adm-tip-border) 20%);
+}
+
+.admonition-info {
+  border-left-color: var(--adm-info-border);
+  background-color:  var(--adm-info-bg);
+}
+.admonition-info .admonition-title {
+  color:            var(--adm-info-title);
+  background-color: color-mix(in srgb, var(--adm-info-bg) 60%, var(--adm-info-border) 20%);
+}
+
+.admonition-warning {
+  border-left-color: var(--adm-warning-border);
+  background-color:  var(--adm-warning-bg);
+}
+.admonition-warning .admonition-title {
+  color:            var(--adm-warning-title);
+  background-color: color-mix(in srgb, var(--adm-warning-bg) 60%, var(--adm-warning-border) 20%);
+}
+
+/* -- Fallback for browsers without color-mix (Firefox <113) - */
+@supports not (color: color-mix(in srgb, red, blue)) {
+  .admonition-note    .admonition-title { background-color: #d8eaf8; }
+  .admonition-tip     .admonition-title { background-color: #cff0df; }
+  .admonition-info    .admonition-title { background-color: #c5edf3; }
+  .admonition-warning .admonition-title { background-color: #f8e9bb; }
+
+  [data-theme="dark"] .admonition-note    .admonition-title { background-color: #1e3448; }
+  [data-theme="dark"] .admonition-tip     .admonition-title { background-color: #13352a; }
+  [data-theme="dark"] .admonition-info    .admonition-title { background-color: #0f343c; }
+  [data-theme="dark"] .admonition-warning .admonition-title { background-color: #33250a; }
+}
