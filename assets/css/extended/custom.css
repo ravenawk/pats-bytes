@@ -274,6 +274,63 @@ h1, h2, h3 {
     margin: 2.5rem 0;
 }
 
+/* ------------------------------------------------------------
+   Categories Landing Page
+   ------------------------------------------------------------ */
+.category-cards {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+@media (min-width: 700px) {
+  .category-cards {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
+.category-card {
+  display: block;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--entry);
+  text-decoration: none !important;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.category-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.category-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.category-card__header h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--primary);
+}
+
+.category-card__count {
+  font-size: 0.8rem;
+  color: var(--secondary);
+}
+
+.category-card__desc {
+  font-size: 0.9rem;
+  color: var(--secondary);
+  line-height: 1.6;
+  margin: 0;
+}
 
 /* ------------------------------------------------------------
    Lists
@@ -397,4 +454,9 @@ h1, h2, h3 {
 .post-meta {
     font-size: 0.85rem;
     opacity: 0.75;
+}
+
+/* Show cover images on tag/category list pages */
+.tag-entry .entry-cover {
+    display: flex;
 }

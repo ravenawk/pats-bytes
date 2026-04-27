@@ -1,6 +1,6 @@
 ---
 title: "Search"
 layout: "search"
-summary: "Search Pat's Bytes"
-placeholder: "ansible, homelab, linux..."
+summary: "search"
+placeholder: "Search Pat's Bytes..."
 ---

@@ -8,6 +8,7 @@ tags:
   - ansible
   - yaml
   - automation
+categories: ["Quick Byte"]
 cover:
   image: "cover.png"
   alt: "Before and after YAML showing module_defaults usage"
