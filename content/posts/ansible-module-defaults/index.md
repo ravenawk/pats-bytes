@@ -1,7 +1,7 @@
 ---
 title: "Simplify Playbooks with module_defaults"
 date: 2026-04-25
-draft: false
+draft: true
 summary: "Stop repeating connection params across tasks — module_defaults lets you set them once per play or block. Here's how and when to use it."
 description: "Stop repeating connection params across tasks — module_defaults lets you set them once per play or block. Here's how and when to use it."
 tags:
@@ -13,7 +13,6 @@ cover:
   image: "cover.png"
   alt: "Before and after YAML showing module_defaults usage"
   relative: true
-ShowToc: true
 ---
 
 If you've ever written a playbook where every task repeats the same `become`, 
