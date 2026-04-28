@@ -3,7 +3,7 @@ public/
 resources/_gen/
 .hugo_build.lock
 
-# Node (if you ever add npm-based tooling)
+# Node
 node_modules/
 package-lock.json
 
