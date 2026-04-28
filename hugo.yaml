@@ -78,7 +78,7 @@ params:
   ShowPostNavLinks: true     # previous/next post links at bottom
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true  # one-click copy on all code blocks
-  ShowWordCount: false       # reading time is enough
+  ShowWordCount: true       # reading time is enough
   ShowRssButtonInSectionTermList: true
   ShowToc: true              # table of contents on by default
   TocOpen: true             # collapsed by default — reader opens if wanted

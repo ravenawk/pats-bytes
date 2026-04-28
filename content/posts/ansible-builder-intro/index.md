@@ -1,21 +1,18 @@
 ---
+title: "Ansible Builder: A Beginners Guide"
+summary: Stop copying Python deps by hand. Build custom Ansible Execution Environments using Ansible Builder.
+description: Learn how to use Ansible Builder to create custom Ansible Execution Environments with the dependencies and tools your automation requires.
 date: 2023-06-30
 lastmod: 2025-08-26
-authors:
-  - pat
-categories:
-  - quick-start
-  - ansible-automation
-tags:
+categories: 
+  - Quick Start
+tags: 
   - ansible
 ---
-# Ansible Builder: A Beginners Guide
 
-Ansible Builder enables you to build and customize execution environments, creating reproducible environments tailored to your specific work needs.
-These environments ensure consistent and reproducible execution of playbooks and roles by providing a known environment. 
+In Ansible, an execution environment is a container image that includes all the necessary dependencies, modules, and plugins needed to run automation tasks.
 
-<!-- more -->
-Execution environments in Ansible refer to container images that include all the necessary dependencies, modules, and plugins to execute Ansible automation.
+With Ansible Builder, you can build and customize these images, ensuring consistent and reproducible execution of playbooks and roles in a known environment. 
 
 ## Prerequisites
 You should have the following installed on your system:
@@ -24,8 +21,10 @@ You should have the following installed on your system:
 - Python
 - pip
 
-!!! note
-    Red Hat subscribers can install Builder via RPM packages, but this guide focuses on the pip installation method.
+
+{{< admonition type="note" title="Note" >}}
+Red Hat subscribers can install Builder via RPM packages, but this guide focuses on the pip installation method.
+{{< /admonition >}}
 
 ## Installation
 We will install using `pip`, the Python package manager. 
@@ -33,10 +32,10 @@ We will install it in a Python virtual environment to isolate the installation a
 
 Create and activate a virtual environment:
 ```bash
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+$ python3 -m venv venv
+$ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-`pip install ansible-builder`
+$ pip install ansible-builder
 ``` 
 
 
@@ -47,7 +46,7 @@ Let's use Ansible Builder to build an execution environment for managing Proxmox
 
 While you can include various files in your execution environment build, the core file is `execution-environment.yml`.
 
-```yaml title="execution-environment.yml"
+```yaml
 ---
 version: 3
 
@@ -87,7 +86,7 @@ The above `execution-environment.yml` has all the Ansible, Python, and system re
 You can also specify them as separate files, such as `requirements.yml` (Ansible) and `requirements.txt` (Python).
 
 
-```yaml title="Using seperate files"
+```yaml
 --snip--
 dependencies:
   ansible_core:
@@ -101,16 +100,19 @@ dependencies:
 ```
 
 
-!!! note "Requirements"
-    When building an execution environment, the final image requires both Ansible Core and Ansible Runner - this can be pre-installed in the base image or added during the build process, as shown above.
+{{< admonition type="note" title="Requirements" >}}
+When building an execution environment, the final image requires both Ansible Core and Ansible Runner - this can be pre-installed in the base image or added during the build process, as shown above.
+{{< /admonition >}}
 
 I have included an empty `ansible.cfg` here to show how you include it in your image build. 
 Feel free to put any options in this file that you want to use in your execution environment. 
 Our `execution-environment.yml` will put this in the container image where we specify. 
 We will look more at this later on.
 
-!!! note "Possible gotchas"
-    When I first wrote this article, the build process didn’t require any additional RPMs, and I had to call out `microdnf` as the package manager explicitly (it handles some RPM installs even if you don’t request extra packages). In the current version, the build looks for `microdnf` by default, but awx-ee now includes `dnf`. Because of this, I had to adjust the steps above to get everything working again. I’m calling this out since these details may continue to change in future releases.
+
+{{< admonition type="note" title="Possible Gotchas" >}}
+When I first wrote this article, the build process didn’t require any additional RPMs, and I had to call out `microdnf` as the package manager explicitly (it handles some RPM installs even if you don’t request extra packages). In the current version, the build looks for `microdnf` by default, but awx-ee now includes `dnf`. Because of this, I had to adjust the steps above to get everything working again. I’m calling this out since these details may continue to change in future releases.
+{{< /admonition >}}
 
 When the files are ready, execute the following command:
 
@@ -240,7 +242,7 @@ This article isn't about ansible-navigator, but here is what each of the option 
 
 After the playbook run if we check proxmox we see our vm.
 
-![Proxmox vm](/assets/images/proxmox.png)
+{{< figure src="proxmox.png" alt="Proxmox VM" caption="New VM" >}}
 
 It works! Now we can share that execution environment with others and know that everyone is working in the same environment. Now let's go back and check one last thing.
 
@@ -272,18 +274,11 @@ Take some time to explore these copied and generated files - they reveal how ans
 
 Ansible Builder is a tool for creating your own execution environments. By leveraging its capabilities to bundle dependencies, modules, and plugins, you can ensure consistent and reliable execution of your automation workflows. This article scratches the surface of what you can do. Be sure to check out the documentation for more options.
 
-## References and further reading
+## References and Further Reading
 
-Ansible Builder github:  
-<https://github.com/ansible/ansible-builder>
+- [Ansible Builder GitHub](https://github.com/ansible/ansible-builder)
+- [Installing Packages (Python)](https://packaging.python.org/en/latest/tutorials/installing-packages/)
+- [Proxmox](https://proxmox.com/en/)
+- [Ansible Navigator GitHub](https://github.com/ansible/ansible-navigator)
+- [Ansible Navigator (Pat's Bytes)]({{< ref "ansible-navigator-intro" >}})
 
-Installing Packages: (Python)  
-<https://packaging.python.org/en/latest/tutorials/installing-packages/>
-
-Proxmox:  
-<https://proxmox.com/en/>
-
-Ansible Navigator github:  
-<https://github.com/ansible/ansible-navigator>
-
-[Ansible Navigator](ansible_navigator_intro.md)

@@ -1,15 +1,15 @@
 ---
 title: "Ansible Navigator: Beginner's Guide"
+description: Learn how to use Ansible Navigator for running playbooks in execution environments. A beginner-friendly guide to modern Ansible automation.
 date: 2023-12-29
 lastmod: 2025-08-24
-author: "Pat Martin"
-summary: "Ansible Navigator is a new way to use familiar Ansible tools."
-categories: [ "Quick Start", "ansible-automation"]
-tags: [ "ansible" ]
+authors: Pat Martin
+categories:
+  - quick-start
+tags:
+  - ansible
 ---
-# Ansible Navigator: Beginner's Guide
-Ansible Navigator is a new way to use familiar Ansible tools.
-Tools like ansible-playbook, ansible-inventory, and ansible-doc are just some examples of what Navigator can do as a comprehensive, all-in-one tool. 
+Ansible Navigator offers a new way to use familiar Ansible tools within execution environments. With it, you can run playbooks, view inventories, access Ansible documentation, and more. Let's explore some of the basics of Ansible Navigator.
 
 The purpose of Ansible Navigator is to enable running playbooks within execution environments, the same way that Ansible Automation Platform runs jobs inside them. This functionality means you can now develop and test your playbooks in the same environment you would be running in production.
 
@@ -22,20 +22,21 @@ You should have the following installed on your system:
 - Python
 - pip
 
+
 {{< admonition type="note" title="Note" >}}
 Red Hat subscribers can install Navigator via RPM packages, but this guide focuses on the pip installation method.
 {{< /admonition >}}
 
-### Installation
+## Installation
 We will install Ansible Navigator using `pip`, the Python package manager.
 We will install it in a Python virtual environment to isolate the installation and prevent potential conflicts with system packages. 
 
 Create and activate a virtual environment:
-```
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-pip install ansible-navigator
+```bash
+$ python -m venv venv
+$ source venv/bin/activate  # On Windows: venv\Scripts\activate
+$ pip install ansible-navigator
 ```
 
 ## Exploring ansible-navigator
@@ -43,7 +44,7 @@ pip install ansible-navigator
 With ansible-navigator installed you can run it by typing:
 
 
-```
+```bash
 ❯ ansible-navigator
 -------------------------------------------------------------------------------------
 Execution environment image and pull policy overview
@@ -62,45 +63,49 @@ Running the command: podman pull ghcr.io/ansible/community-ansible-dev-tools:lat
 
 The first time you run it, it will download a community-ansible-dev-tools container as shown above.
 
-Once that's done, you will see the following screen:
 
-{{< figure src="ansible-navigator.png" caption="Ansible Navigator interface" >}}
+### The Default View
+Once that's done you will see the following screen:
+{{< figure src="ansible-navigator.png" alt="Ansible Navigator" caption="Ansible Navigator" >}}
 
 You can see from the list that some tools incorporated into ansible-navigator are ansible-doc, ansible-playbook, and ansible-inventory. For now, let's look at the images option.
 
 Before we do that let's exit out and download the homelab-ee that is an evolution of the execution environment I made in the article, [Ansible Builder]( ansible_builder_intro.md ), by doing a podman pull.
 
+
+### Inspecting Execution Environment Images
 Now let's reopen ansible-navigator and go to the images section. You do that by typing a colon followed by the option you want, so in our case `:images`.
 
-{{< figure src="ee-images.png" caption="Ansible Navigator images" >}}
-
+{{< figure src="ee-images.png" alt="Ansible Navigator Image view" caption="Container Images" >}}
 
 We have two container images on our system, as shown above. The default image is the creator-ee; we will look at one way to change that later. It also tells us if the container images we have on our system are usable as execution environments.
 
 Let's examine homelab-ee; you do that by pressing the number next to the image name, in our case, 1.
 
-{{< figure src="ee-image-info.png" caption="Ansible Navigator image info" >}}
+{{< figure src="image-info.png" alt="Ansible Navigator Image example" caption="Homelab EE Image Info" >}}
 
-It shows the image name at the top and gives us more choices. Let's look at info about Ansible and Python packages installed in the execution environment. You can select "Ansible version and collections" by pressing 2.
+It shows the image name at the top and gives us more choices. 
 
-![Ansible Info](/assets/images/ansible_info.png)
+### Viewing Ansible Info
+Let's look at info about Ansible and Python packages installed in the execution environment. You can select "Ansible version and collections" by pressing 2.
+
+{{< figure src="ansible-info.png" alt="Ansible Navigator Image ansible view" caption="Homelab EE Ansible Info" >}}
 
 Here, we can see all the collections and the version of Ansible installed in the execution environment.
 
+### Viewing Python Packages
 Let's look at one more option. Hitting 'esc' takes us back one page and then let's select "Python packages" by hitting 3.
 
-This gives us a list of all the Python packages installed on the system. If we use the up and down cursor keys it scrolls through the list, in this case there are 71 Python packages installed in the image. An interesting one to note is the *proxmoxer* package #37 which was installed in the execution environment to be albe to run the proxmox modules.
+This gives us a list of all the Python packages installed on the system. If we use the up and down cursor keys it scrolls through the list, in this case there are 71 Python packages installed in the image. An interesting one to note is the *proxmoxer* package #37 which was installed in the execution environment to be able to run the proxmox modules.
 
-I will leave the rest of the options under images up to you to explore.
-![Python packages](/assets/images/python_packages.png)
+{{< figure src="python-packages.png" alt="Ansible Navigator Image Python package list" caption="Homelab EE Python packages" >}}
 
+Feel free to explore the remaining image options on your own — there's a lot to discover!
 
-### Configuring Ansible Navigator
-First lets see what kind of options we have, let's run:
+## Configuring Ansible Navigator
+First, let's see what kind of options we have, let's run:
 
-`ansible-navigator --help`
-
-```
+```bash
 $ ansible-navigator --help
 Usage: ansible-navigator [options]
 
@@ -121,7 +126,7 @@ Subcommands:
 ```
 There are numerous options and subcommands available for Ansible Navigator. Run this yourself to see the whole list. Let's take a look at the help page for the `settings` subcommand.
 
-```
+```bash
 $ ansible-navigator settings --help
 Usage: ansible-navigator settings [options]
 
@@ -148,7 +153,7 @@ Options (settings subcommand):
 
 Let's look at the option `--gs`, which generates a sample Navigator configuration with all options commented out.
 
-```
+```bash
 $ ansible-navigator settings --gs
 ---
 ansible-navigator:
@@ -162,23 +167,22 @@ ansible-navigator:
 [... additional configuration ...]
 #   time-zone: UTC
 ```
-Here you can set all kind of options, if you look under `execution-environment` you can see how we specify `image` the default image used by ansible-navigator. 
+Here you can set all kinds of options, if you look under `execution-environment` you can see how we specify `image` the default image used by ansible-navigator. 
 In this case its the creator-ee that navigator downloaded when we first started it up. Let's make that our homelab-ee.
 
->**Ansible Navigator config locations checked**
->
->First match is used(this may change in future releases):
->
->|
->|----------------------------------------|-----------------------------------------|
->| ANSIBLE_NAVIGATOR_CONFIG               | env variable                            |
->| ./ansible-navigator.\<ext\>            | No dot at begining of the file name, this is in the project directory |
->| ~/.ansible-navigator.\<ext\>           | Dot at the beginning of the file name, this is in the user home directory |
->
->__\<ext\> can be either yaml/yml or json debending on what format the file is in.__
+Before we create our config file, it's worth knowing where Navigator looks for it:
+{{< admonition type="tip" title="Config File Locations (first match wins)" >}}
+| Location | Description |
+|---|---|
+| `ANSIBLE_NAVIGATOR_CONFIG` | Environment variable |
+| `./ansible-navigator.<ext>` | Project directory |
+| `~/.ansible-navigator.<ext>` | User home directory |
+
+`<ext>` can be `yaml`, `yml`, or `json`.
+{{< /admonition >}}
 
 In our local directory we will add an ansible-navigator.yml file and add our custom ee.
-```
+```yaml
 ---
 ansible-navigator:
   execution-environment:
@@ -187,20 +191,13 @@ ansible-navigator:
 
 Running ansible-navigator and selecting images we see that our image is now default:
 
-![homelab-ee default](/assets/images/homelab-ee_default.png)
+{{< figure src="homelab-ee-default.png" alt="Ansible Navigator Showing Homelab EE as Default" caption="Homelab EE as Default" >}}
 
 As we wrap up this intro to Ansible Navigator, you now know how to install and perform basic configuration. Watch for future articles where we'll dive deeper into other parts of Ansible Navigator. Until then, happy automating, and stay tuned for more insights and guides!
 
-### References and further reading:
+## References and further reading
 
-Ansible Navigator documentation:  
-<https://ansible.readthedocs.io/projects/navigator/>
-
-Installing Ansible Navigator:  
-<https://ansible.readthedocs.io/projects/navigator/installation/>
-
-Installing Packages: (Python)  
-<https://packaging.python.org/en/latest/tutorials/installing-packages/>
-
-Ansible Navigator settings:  
-<https://ansible.readthedocs.io/projects/navigator/settings/>
+- [Ansible Navigator Documentation](https://ansible.readthedocs.io/projects/navigator/)
+- [Installing Ansible Navigator](https://ansible.readthedocs.io/projects/navigator/installation/)
+- [Installing Packages (Python)](https://packaging.python.org/en/latest/tutorials/installing-packages/)
+- [Ansible Navigator Settings](https://ansible.readthedocs.io/projects/navigator/settings/)
