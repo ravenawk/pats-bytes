@@ -82,6 +82,10 @@ options:
   package_manager_path: /usr/bin/dnf
 ```
 
+{{< admonition type="warning" title="Outdated Version" >}}
+This article uses `ansible-core==2.14.0` as an example. You should check the [Ansible documentation](https://docs.ansible.com) for the current supported release and update accordingly.
+{{< /admonition >}}
+
 The above `execution-environment.yml` has all the Ansible, Python, and system requirements in line. 
 You can also specify them as separate files, such as `requirements.yml` (Ansible) and `requirements.txt` (Python).
 
@@ -217,7 +221,7 @@ This is the simple playbook we will be running.
 Here is the playbook run.
 
 ```bash
-ansible-navigator run --eei localhost/proxmox-ee clone_vm_proxmox.yml --pp=never -m stdout -i inventory
+ansible-navigator run --eei localhost/proxmox-env clone_vm_proxmox.yml --pp=never -m stdout -i inventory
 
 PLAY [localhost] ***************************************************************
 
@@ -231,13 +235,14 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
 
-This article isn't about ansible-navigator, but here is what each of the option does. (You can find more details about Ansible Navigator [in this post.](ansible_navigator_intro.md))
-
+For more details on ansible-navigator, check out [this post]({{< ref "ansible-navigator-intro" >}}).
 | Option | Description |
 |--------|-------------|
 | run    | Runs a playbook |
-| --eei  | What execution environment to use |
+| --eei  | What execution environment image to use |
 | --pp   | Pull policy, whether or not to pull the image |
+| -m     | Output mode, `stdout` disables the interactive TUI |
+| -i     | Inventory file or host pattern to use |
 
 
 After the playbook run if we check proxmox we see our vm.
