@@ -2,7 +2,7 @@
 # Pat's Bytes — Hugo + PaperMod Configuration
 # ============================================================
 
-baseURL: "https://patsbytes.com/"   # Replace with your actual Cloudflare Pages domain
+baseURL: "https://patsbytes.net/"   # Replace with your actual Cloudflare Pages domain
 title: "Pat's Bytes"
 languageCode: "en-us"
 paginate: 10                        # Posts per list page
