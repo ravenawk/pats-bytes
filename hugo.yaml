@@ -37,6 +37,10 @@ markup:
 
 # ── Site parameters ───────────────────────────────────────────
 params:
+  label:
+    text: "Pat's Bytes"
+    icon: /pb_icon.svg
+    iconHeight: 35
   author: "Pat"
   description: >
     Learning in public — Ansible, homelab infrastructure, Linux, and DevOps tooling.
